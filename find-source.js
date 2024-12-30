@@ -4,7 +4,7 @@ import process from 'node:process';
 
 const isZip = filepath => path.extname(filepath) === '.zip';
 
-// Node hates race conditons and ease of use
+// Node hates race conditions and ease of use
 // https://github.com/nodejs/node/issues/39960#issuecomment-909444667
 async function exists(f) {
     try {
@@ -38,8 +38,8 @@ async function processDirectory(resolvedPath, errorStart = 'The') {
 
 async function getPathFromPackageJson() {
     const cwd = process.cwd();
-
     const packageJsonPath = path.join(cwd, 'package.json');
+
     if (!await exists(packageJsonPath)) {
         return undefined;
     }
