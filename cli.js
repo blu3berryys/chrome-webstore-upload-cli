@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import path from 'node:path';
 import process from 'node:process';
 import meow from 'meow';
@@ -121,6 +119,7 @@ function errorHandler(error) {
     if (error?.name === 'HTTPError') {
         const response = JSON.parse(error?.response?.body ?? '{}');
         const { clientId, refreshToken } = apiConfig;
+
         if (response.error_description === 'The OAuth client was not found.') {
             console.error(
                 'Probably the provided client ID is not valid. Try following the guide again',
@@ -133,7 +132,6 @@ function errorHandler(error) {
         }
 
         if (response.error_description === 'Bad Request') {
-            const { clientId } = apiConfig;
             console.error(
                 'Probably the provided refresh token is not valid. Try following the guide again',
             );
@@ -145,7 +143,6 @@ function errorHandler(error) {
         }
 
         if (error?.message === 'Response code 400 (Bad Request)') {
-            // Nothing else to add
             return;
         }
     }
