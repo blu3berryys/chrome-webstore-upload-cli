@@ -11,6 +11,7 @@ test('Favors params over env vars', async t => {
     const config = await createConfig(null, { extensionId: expectedId });
 
     t.is(config.apiConfig.extensionId, expectedId);
+
     delete process.env.EXTENSION_ID;
 });
 
@@ -28,6 +29,7 @@ test('All options supported as env vars', async t => {
     }
 
     const config = await createConfig(null, {});
+
     t.is(config.apiConfig.extensionId, varsValue);
     t.is(config.apiConfig.clientId, varsValue);
     t.is(config.apiConfig.clientSecret, varsValue);
@@ -72,6 +74,7 @@ test('Publish without deploy percentage', async t => {
 
 test('Auto upload and publish', async t => {
     const config = await createConfig('', {});
+
     t.false(config.isPublish);
     t.true(config.isUpload);
     t.true(config.autoPublish);
