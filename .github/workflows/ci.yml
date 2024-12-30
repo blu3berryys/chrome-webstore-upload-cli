@@ -1,7 +1,10 @@
 name: CI
+
 on:
-  - push
-  - pull_request
+  push:
+  pull_request:
+  workflow_dispatch:
+
 jobs:
   test:
     name: Node.js ${{ matrix.node-version }}
@@ -12,10 +15,18 @@ jobs:
         node-version:
           - 20
           - 18
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm test
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm test
