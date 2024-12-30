@@ -132,6 +132,7 @@ function errorHandler(error) {
         }
 
         if (response.error_description === 'Bad Request') {
+            const { clientId } = apiConfig;
             console.error(
                 'Probably the provided refresh token is not valid. Try following the guide again',
             );
